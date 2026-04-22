@@ -1,0 +1,318 @@
+/*
+    ================================================================================
+    ARCHIVO: styles.css
+    PROPÓSITO: Todos los estilos visuales de la aplicación
+    ================================================================================
+    
+    ¿QUÉ ES CSS?
+    CSS (Cascading Style Sheets) es el lenguaje que hace que las páginas web
+    se vean bonitas. Define colores, tamaños, posiciones, efectos, etc.
+    
+    CAMBIOS REALIZADOS EN ESTA SESIÓN:
+    
+    1. ✅ Botones mejorados con sombras y efectos al pasar el ratón
+    2. ✅ Inputs de texto con bordes suaves y transiciones
+    3. ✅ Selects (dropdowns) personalizados con estilo moderno
+    4. ✅ Formulario "Registro de Ubicación" con diseño elegante
+    5. ✅ Sección de copyright con estilos especiales
+    
+    ================================================================================
+    CONCEPTOS CLAVE DE CSS QUE USAMOS
+    ================================================================================
+    
+    1. SELECTORES:
+       body {} - Selecciona el elemento <body>
+       .clase {} - Selecciona elementos con class="clase"
+       #id {} - Selecciona elementos con id="id"
+       element:hover {} - Cuando pasas el ratón encima
+       element:focus {} - Cuando haces click (para inputs)
+    
+    2. PROPIEDADES IMPORTANTES:
+       color: - Cambia el color del texto
+       background: - Cambia el fondo
+       border: - Agrega un borde
+       border-radius: - Hace los bordes redondeados
+       box-shadow: - Agrega una sombra
+       transition: - Hace las transiciones suaves
+       transform: - Rota, agranda, mueve elementos
+       padding: - Espacio interno
+       margin: - Espacio externo
+    
+    3. VALORES DE COLOR:
+       #00c9ff - Color cian (código hexadecimal)
+       rgba(0, 201, 255, 0.4) - Color cian con transparencia
+       "0" al final = completamente transparente
+       "1" al final = completamente opaco
+    
+    4. BOX SHADOW (Sombra):
+       box-shadow: offset-x offset-y blur-radius color;
+       Ejemplo: 0 4px 12px rgba(0, 0, 0, 0.15)
+       0px hacia los lados
+       4px hacia abajo
+       12px de difuminación
+       color semi-transparente
+    
+    5. TRANSFORM (Transformaciones):
+       transform: scale(1.05) - Agranda un elemento 5%
+       transform: translateX(20px) - Mueve 20px a la derecha
+       transform: rotate(45deg) - Rota 45 grados
+    
+    6. TRANSITION (Transiciones suaves):
+       transition: 0.3s - La animación dura 0.3 segundos
+       transition: all 0.3s ease - Todas las propiedades con suavidad
+    
+    ================================================================================
+    CAMBIOS EN DETALLE
+    ================================================================================
+    
+    BOTONES:
+    - Ahora tienen box-shadow para profundidad
+    - En hover: la sombra se agrandas y el botón crece (scale 1.05)
+    - Texto más grande (16px)
+    - Espaciado entre letras (letter-spacing)
+    
+    INPUTS:
+    - Fondo blanco semitransparente (0.95 = casi opaco)
+    - Bordes transparentes por defecto, se vuelven cian en hover/focus
+    - Sombra suave que cambia en hover
+    - Transiciones suaves de 0.3s
+    
+    SELECTS:
+    - Mismos estilos que inputs
+    - Icono SVG personalizado de flecha (background-image)
+    - Sin apariencia predeterminada del navegador
+    - Mismo glow (resplandor) en focus que los inputs
+    
+    FORMULARIO:
+    - Borde sutil en cian
+    - Sombra interna (box-shadow inset)
+    - Bordes más redondeados (12px)
+    - Título en color cian con sombra de texto
+    
+    COPYRIGHT:
+    - Texto pequeño (12px) y semi-transparente
+    - Nombre del creador en color cian brillante
+    - Borde superior para separación visual
+    
+    ================================================================================
+*/
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-align: center;
+    margin: 0;
+    transition: 0.5s;
+}
+ 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+ 
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
+    width: 320px;
+}
+ 
+input, button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    box-sizing: border-box;
+}
+ 
+button {
+    background: #00c9ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    
+    /* LÍNEA IMPORTANTE: Agregamos sombra al botón para darle profundidad */
+    box-shadow: 0 4px 12px rgba(0, 201, 255, 0.4);
+    
+    /* Aumentamos el tamaño de fuente para que se vea más grande */
+    font-size: 16px;
+    
+    /* Agregamos un pequeño espacio interno extra para mejor apariencia */
+    letter-spacing: 0.5px;
+}
+ 
+/* EFECTO HOVER MEJORADO: cuando pasas el ratón sobre el botón */
+button:hover { 
+    background: #008eb5; 
+    
+    /* LÍNEA IMPORTANTE: Aumentamos la sombra en hover para efecto 3D */
+    box-shadow: 0 6px 16px rgba(0, 201, 255, 0.6);
+    
+    /* Agregamos transformación: el botón crece un poco al pasar el ratón */
+    transform: scale(1.05);
+}
+ 
+.section {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+ 
+/* Switch Estilo */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+.switch input { display: none; }
+.slider {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.slider:before {
+    position: absolute; content: "";
+    height: 14px; width: 14px;
+    left: 3px; bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+input:checked + .slider { background-color: #2196F3; }
+input:checked + .slider:before { transform: translateX(20px); }
+
+/* ====== ESTILOS MODERNOS PARA EL FORMULARIO DE REGISTRO ====== */
+
+/* LÍNEA IMPORTANTE: Estilos para inputs de texto y placeholders */
+input[type="text"] {
+    background: rgba(255, 255, 255, 0.95) !important;  /* Fondo blanco semitransparente */
+    color: #333 !important;  /* Texto oscuro para contraste */
+    border: 2px solid transparent !important;  /* Borde transparente por defecto */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;  /* Sombra suave */
+    transition: all 0.3s ease !important;  /* Transición suave */
+    font-size: 14px !important;
+}
+
+/* LÍNEA IMPORTANTE: Efecto hover en inputs */
+input[type="text"]:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;  /* Sombra más pronunciada */
+    border-color: #00c9ff !important;  /* Borde color cian */
+}
+
+/* LÍNEA IMPORTANTE: Efecto focus (cuando el usuario hace click) */
+input[type="text"]:focus {
+    outline: none !important;
+    border-color: #00c9ff !important;  /* Borde cian brillante */
+    box-shadow: 0 0 0 3px rgba(0, 201, 255, 0.2) !important;  /* Resplandor */
+    background: rgba(255, 255, 255, 1) !important;
+}
+
+/* LÍNEA IMPORTANTE: Estilos para los placeholders */
+input[type="text"]::placeholder {
+    color: #999 !important;
+    font-style: italic !important;
+}
+
+/* ====== ESTILOS PARA SELECT (DROPDOWN) ====== */
+
+/* LÍNEA IMPORTANTE: Personalización del select */
+select {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #333 !important;
+    border: 2px solid transparent !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    font-size: 14px !important;
+    padding: 12px !important;
+    width: 100% !important;
+    margin: 10px 0 !important;
+    box-sizing: border-box !important;
+    
+    /* Apariencia moderna */
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    
+    /* Fondo con icono de dropdown */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300c9ff' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 20px !important;
+    padding-right: 40px !important;
+}
+
+/* LÍNEA IMPORTANTE: Efecto hover en select */
+select:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+    border-color: #00c9ff !important;
+}
+
+/* LÍNEA IMPORTANTE: Efecto focus en select */
+select:focus {
+    outline: none !important;
+    border-color: #00c9ff !important;
+    box-shadow: 0 0 0 3px rgba(0, 201, 255, 0.2) !important;
+}
+
+/* ====== MEJORA DEL TÍTULO DEL FORMULARIO ====== */
+
+/* LÍNEA IMPORTANTE: Estilo para el h3 del formulario */
+.section h3 {
+    color: #00c9ff !important;
+    font-size: 18px !important;
+    margin-bottom: 15px !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* ====== MEJORA DE LA SECCIÓN FORMULARIO ====== */
+
+/* LÍNEA IMPORTANTE: Mejora visual de la sección */
+.section {
+    margin-top: 20px;
+    padding: 15px !important;
+    background: rgba(0, 0, 0, 0.1) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(0, 201, 255, 0.2) !important;  /* Borde cian sutil */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1) !important;  /* Sombra interna */
+}
+
+/* ====== ESTILOS PARA LA SECCIÓN DE COPYRIGHT ====== */
+
+/* LÍNEA IMPORTANTE: Estilos para el footer/copyright */
+.copyright-footer {
+    margin-top: 30px !important;
+    padding-top: 20px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+    font-size: 12px !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-align: center !important;
+}
+
+/* LÍNEA IMPORTANTE: Párrafos dentro del footer con espaciado */
+.copyright-footer p {
+    margin: 5px 0 !important;
+    line-height: 1.6 !important;
+}
+
+/* LÍNEA IMPORTANTE: Nombre del creador destacado en color cian */
+.creator-name {
+    font-weight: bold !important;
+    color: #00c9ff !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
