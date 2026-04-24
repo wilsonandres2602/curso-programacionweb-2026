@@ -2,17 +2,11 @@ function cambiarColor() {
     document.body.style.background = "linear-gradient(135deg, #ff6a00, #ee0979)";
 }
 
-// Reemplaza el alert() por el modal bonito
+
 function mostrarAlerta() {
-    document.getElementById("modalOverlay").classList.add("active");
+    alert("¡Hola! Esta es una función de JavaScript.");
 }
 
-function cerrarModal(event) {
-    // Si se hizo click en el overlay (fondo) o en el botón cerrar, cierra
-    if (!event || event.target === document.getElementById("modalOverlay") || event.target.classList.contains("modal-close")) {
-        document.getElementById("modalOverlay").classList.remove("active");
-    }
-}
 
 function addTask() {
     const input = document.getElementById("taskInput");
@@ -23,28 +17,36 @@ function addTask() {
         document.getElementById("taskList").appendChild(li);
         input.value = "";
     }
+
 }
 
-// PUNTO 1: Slider cambia opacidad de la card (0.1 a 1.0)
+
 function updateValue(val) {
     document.getElementById("value").innerText = val;
-    const opacidad = 0.1 + (val / 100) * 0.9;
-    document.getElementById("mainCard").style.opacity = opacidad;
+
+    let opacidad = val / 100;
+    if (opacidad < 0.1) opacidad = 0.1;
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach(card => {
+        card.style.background = `rgba(255, 255, 255, ${opacidad})`;
+    });
 }
+
+
 
 function toggleModo(el) {
     document.body.style.background = el.checked ? "#111" : "linear-gradient(135deg, #667eea, #764ba2)";
 }
 
-function cargarCiudades(idPais) {
-    if (idPais === "") {
-        document.getElementById("ciudad").innerHTML = "<option value=''>Seleccione ciudad</option>";
-        return;
-    }
-    fetch("get_ciudades.php?id_pais=" + idPais)
+
+
+function cargarCiudades() {
+    const pais = document.getElementById("pais").value;
+    fetch("get_ciudades.php?id_pais=" + pais)
         .then(response => response.text())
         .then(data => {
-            document.getElementById("ciudad").innerHTML = data;
-        })
-        .catch(error => console.error("Error cargando ciudades:", error));
+            document.getElementById("ciudad").innerHTML =
+                "<option value=''>Seleccione una ciudad</option>" + data;
+        });
 }

@@ -1,12 +1,12 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "mi_proyecto";
+$host="localhost";
+$user="root";
+$pass="";
+$db="mi_proyecto";
 
-$conn = new mysqli($host, $user, $pass, $db);
+$conexion=mysqli_connect($host,$user,$pass,$db);
 
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+if(!$conexion){
+    die("Error de conexion: ". mysqli_connect_error());
 }
 ?>
