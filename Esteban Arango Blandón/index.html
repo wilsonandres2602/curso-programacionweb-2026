@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>App Web Interactiva</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- LOGIN -->
+    <div id="loginView">
+      <div class="card">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Usuario">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="login()">Ingresar</button>
+        <p class="error" id="error"></p>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="dashboard hidden" id="dashboard">
+
+      <!-- BANNER -->
+      <div class="banner">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/2mRlUWNIPzo?si=ajJSv-oHEFia7Rm9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+        <div class="banner-overlay">
+          <span>✈️ Explora el mundo</span>
+        </div>
+      </div>
+
+      <div class="card" id="mainCard">
+
+        <div class="dash-header">
+          <h1>Bienvenido 👋</h1>
+          <p>Panel de control</p>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="grid-2">
+          <button class="btn-animated" onclick="cambiarColor()">Cambiar color</button>
+          <button class="btn-animated" onclick="mostrarAlerta()">Alerta</button>
+        </div>
+
+        <!-- TAREAS -->
+        <div class="section">
+          <div class="section-label">Tareas</div>
+          <div class="task-row">
+            <input type="text" id="taskInput" placeholder="Nueva tarea...">
+            <button class="btn-animated" onclick="addTask()">+</button>
+          </div>
+          <ul id="taskList"></ul>
+        </div>
+
+        <!-- SLIDER VOLUMEN -->
+        <div class="section">
+          <div class="section-label">Volumen</div>
+          <div class="slider-row">
+            <span class="icon">🔈</span>
+            <input type="range" min="0" max="100" value="50" step="1" oninput="updateVolumen(this.value)">
+            <span class="slider-val" id="volValue">50</span>
+            <span class="icon">🔊</span>
+            <button class="btn-play btn-animated" id="btnPlay" onclick="toggleAudio()">▶</button>
+          </div>
+        </div>
+
+        <!-- SLIDER BRILLO -->
+        <div class="section">
+          <div class="section-label">Brillo</div>
+          <div class="slider-row">
+            <span class="icon">🌑</span>
+            <input type="range" min="20" max="100" value="100" step="1" oninput="updateBrillo(this.value)">
+            <span class="slider-val" id="brilloValue">100</span>%
+            <span class="icon">☀️</span>
+          </div>
+        </div>
+
+        <!-- SWITCH -->
+        <div class="section">
+          <div class="section-label">Apariencia</div>
+          <div class="switch-row">
+            <label class="switch">
+              <input type="checkbox" onchange="toggleModo(this)">
+              <span class="slider-toggle"></span>
+            </label>
+            <span>Modo oscuro</span>
+          </div>
+        </div>
+
+      </div><!-- /.card -->
+
+      <!-- FORMULARIO REGISTRO DE UBICACIÓN -->
+      <div class="card card-ubicacion" id="cardUbicacion">
+        <div class="dash-header">
+          <h2>📍 Registro de Ubicación</h2>
+          <p>Guarda tu destino favorito</p>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Nombre de usuario</div>
+          <input type="text" id="regNombre" placeholder="Tu nombre...">
+        </div>
+
+        <div class="section">
+          <div class="section-label">País</div>
+          <select id="selectPais" onchange="cargarCiudades(this.value)" class="select-styled">
+            <option value="">-- Selecciona un país --</option>
+          </select>
+        </div>
+
+        <div class="section">
+          <div class="section-label">Ciudad</div>
+          <select id="selectCiudad" class="select-styled">
+            <option value="">-- Selecciona una ciudad --</option>
+          </select>
+        </div>
+
+        <p class="feedback hidden" id="feedbackMsg"></p>
+
+        <button class="btn-animated btn-guardar" onclick="guardarDestino()">
+          💾 Guardar Destino
+        </button>
+
+        <!-- Historial de registros -->
+        <div class="section" style="margin-top:1.2rem;">
+          <div class="section-label">Últimos registros</div>
+          <ul id="registrosList"></ul>
+        </div>
+      </div>
+
+    </div><!-- /.dashboard -->
+
+  </div><!-- /#app -->
+
+  <!-- MODAL ALERTA -->
+  <div id="modalOverlay" class="modal-overlay hidden" onclick="cerrarAlerta(event)">
+    <div class="modal-box">
+      <p>Hola 👋 Esto es JavaScript!</p>
+      <button class="btn-animated" onclick="cerrarAlerta()">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer id="siteFooter">
+    <div class="footer-inner">
+      <span>© 2025 App Web Interactiva — Actividad Semana 12</span>
+      <a href="mailto:autor@ejemplo.com">✉️ Contacto</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
