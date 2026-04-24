@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>App Web Interactiva</title>
+    <title>Mi Proyecto Web</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,14 +14,16 @@ $isLogged = isset($_GET['success']) && $_GET['success'] == '1';
 <?php if (!$isLogged): ?>
     <div class="container" id="login-container">
         <div class="card">
-            <h2>Login (PHP + MySQL)</h2>
+            <h2>Inicio de sesión</h2>
+
             <form action="login.php" method="POST">
                 <input type="text" name="username" placeholder="Usuario" required>
                 <input type="password" name="password" placeholder="Contraseña" required>
                 <button type="submit">Ingresar</button>
             </form>
+
             <?php if(isset($_GET['error'])): ?>
-                <p style="color: #ff4d4d; font-size: 14px; margin-top: 10px;">Credenciales incorrectas</p>
+                <p class="error-text">Credenciales incorrectas</p>
             <?php endif; ?>
         </div>
     </div>
@@ -31,18 +33,19 @@ $isLogged = isset($_GET['success']) && $_GET['success'] == '1';
         <div class="card" id="mainCard">
 
             <div class="banner-dashboard">
-                <span class="banner-emoji">🌍</span>
-                <span class="banner-emoji">✈️</span>
                 <div class="banner-dashboard-overlay">
-                    <h2>App Web Interactiva</h2>
+                    <h2>Mi Proyecto Web</h2>
                 </div>
             </div>
 
-            <div style="padding: 0 20px;">
-                <h1>Bienvenido 👋</h1>
-                <p>Sesión validada exitosamente.</p>
+            <div class="card-content">
 
-                <div class="section">
+                <div class="bienvenida-box">
+                    <h1>Bienvenido</h1>
+                    <p>Sesión validada exitosamente.</p>
+                </div>
+
+                <div class="section botones-superiores">
                     <button onclick="cambiarColor()">Cambiar Color</button>
                     <button onclick="mostrarAlerta()">Alerta JS</button>
                 </div>
@@ -58,7 +61,17 @@ $isLogged = isset($_GET['success']) && $_GET['success'] == '1';
                     <input type="range" id="slider" min="0" max="100" value="50" oninput="updateValue(this.value)">
                 </div>
 
-                <div class="section">
+                <div class="acciones-inferiores">
+                    <div class="registro-area">
+                        <a href="registro.php" class="btn-link">Registro de Ubicación</a>
+                    </div>
+
+                    <div class="logout-area">
+                        <a href="logout.php" class="logout-btn">Cerrar Sesión</a>
+                    </div>
+                </div>
+
+                <div class="modo-oscuro-box">
                     <label class="switch">
                         <input type="checkbox" onchange="toggleModo(this)">
                         <span class="slider"></span>
@@ -66,20 +79,15 @@ $isLogged = isset($_GET['success']) && $_GET['success'] == '1';
                     <p>Modo oscuro</p>
                 </div>
 
-                <div class="section">
-                    <a href="registro.php" class="btn-link">🌍 Ir a Registro de Ubicación</a>
-                </div>
-
-                <br>
-                <a href="index.php" style="color: white; font-weight: bold; text-decoration: none;">Cerrar Sesión</a>
-                <br><br>
             </div>
         </div>
 
         <footer class="footer">
-            <p>✨ <strong>Valentina Gaviria</strong> &nbsp;|&nbsp; Proyecto Web 2025</p>
-            <p>
-                <a href="mailto:valen.gaviria98@gmail.com">📧 Contacto</a>
+            <p><strong>Valentina Gaviria</strong> | Proyecto Web 2026</p>
+            <p class="social-links">
+                <a href="https://www.instagram.com/vgr1029/" target="_blank" title="Instagram">📷</a>
+                <a href="mailto:vgaviria@correo.iue.edu.co" title="Correo">✉️</a>
+                <a href="https://wa.me/573001112233" target="_blank" title="WhatsApp">💬</a>
             </p>
         </footer>
     </div>
