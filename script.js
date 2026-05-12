@@ -1,19 +1,11 @@
 function cambiarColor() {
-    document.body.style.background = "linear-gradient(135deg, #ff6a00, #ee0979)";
+    document.body.style.background = "linear-gradient(135deg, #000000, #ffffff)";
 }
-
-// Reemplaza el alert() por el modal bonito
+ 
 function mostrarAlerta() {
-    document.getElementById("modalOverlay").classList.add("active");
+    alert("Mensaje de alerta.");
 }
-
-function cerrarModal(event) {
-    // Si se hizo click en el overlay (fondo) o en el botón cerrar, cierra
-    if (!event || event.target === document.getElementById("modalOverlay") || event.target.classList.contains("modal-close")) {
-        document.getElementById("modalOverlay").classList.remove("active");
-    }
-}
-
+ 
 function addTask() {
     const input = document.getElementById("taskInput");
     if(input.value.trim() !== "") {
@@ -24,27 +16,57 @@ function addTask() {
         input.value = "";
     }
 }
-
-// PUNTO 1: Slider cambia opacidad de la card (0.1 a 1.0)
+ 
 function updateValue(val) {
     document.getElementById("value").innerText = val;
-    const opacidad = 0.1 + (val / 100) * 0.9;
-    document.getElementById("mainCard").style.opacity = opacidad;
+
+    // Calcular opacidad entre 0.1 y 1.0
+    const opacity = 0.1 + (val / 100) * 0.9;
+
+    // Cambiar opacidad de la card principal
+    const card = document.querySelector(".card");
+    if (card) {
+        card.style.opacity = opacity.toFixed(2);
+    }
 }
 
+// Inicializar opacidad al cargar la página
+window.addEventListener("load", () => {
+    updateValue(50);
+});
+ 
 function toggleModo(el) {
+    // Cambiar fondo del body
     document.body.style.background = el.checked ? "#111" : "linear-gradient(135deg, #667eea, #764ba2)";
+    
+    // Cambiar estilo del footer
+    const footer = document.querySelector(".footer");
+    if (footer) {
+        if (el.checked) {
+            footer.classList.add("dark-mode");
+        } else {
+            footer.classList.remove("dark-mode");
+        }
+    }
 }
 
-function cargarCiudades(idPais) {
-    if (idPais === "") {
-        document.getElementById("ciudad").innerHTML = "<option value=''>Seleccione ciudad</option>";
+// Función para cargar ciudades según el país seleccionado
+function cargarCiudades() {
+    const paisId = document.getElementById("pais").value;
+    const ciudadSelect = document.getElementById("ciudad");
+    
+    if (paisId === "") {
+        ciudadSelect.innerHTML = '<option value="">Selecciona una ciudad</option>';
         return;
     }
-    fetch("get_ciudades.php?id_pais=" + idPais)
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("ciudad").innerHTML = data;
-        })
-        .catch(error => console.error("Error cargando ciudades:", error));
+    
+    // Hacer petición AJAX para obtener ciudades
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "get_ciudades.php?id_pais=" + paisId, true);
+    xhr.onload = function() {
+        if (this.status === 200) {
+            ciudadSelect.innerHTML = this.responseText;
+        }
+    };
+    xhr.send();
 }

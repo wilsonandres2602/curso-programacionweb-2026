@@ -1,22 +1,20 @@
 <?php
-require_once "db.php";
+include('db.php');
 
-if (!isset($_GET['id_pais']) || !is_numeric($_GET['id_pais'])) {
-    echo "<option value=''>ID de país inválido</option>";
-    exit;
-}
+if (isset($_GET['id_pais'])) {
+    $id_pais = $_GET['id_pais'];
 
-$id_pais = intval($_GET['id_pais']);
+    echo '<option value="">Selecciona una ciudad</option>';
 
-$result = $conn->query("SELECT * FROM ciudades WHERE id_pais = $id_pais");
+    $query = "SELECT id, nombre FROM ciudades WHERE id_pais = $id_pais";
+    $resultado = mysqli_query($conexion, $query);
 
-if (!$result) {
-    echo "<option value=''>Error al cargar ciudades</option>";
-    exit;
-}
+    if ($resultado) {
+        while ($row = mysqli_fetch_assoc($resultado)) {
+            echo '<option value="' . $row['id'] . '">' . $row['nombre'] . '</option>';
+        }
+    }
 
-echo "<option value=''>Seleccione ciudad</option>";
-while ($row = $result->fetch_assoc()) {
-    echo "<option value='{$row['id']}'>{$row['nombre']}</option>";
+    mysqli_close($conexion);
 }
 ?>

@@ -2,11 +2,11 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db = "mi_proyecto";
+$db = "My_Proyecto";
 
-$conn = new mysqli($host, $user, $pass, $db);
+$conexion = mysqli_connect($host, $user, $pass, $db);
 
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+if (!$conexion) {
+    die("Error de conexión: " . mysqli_connect_error());
 }
 ?>
