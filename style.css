@@ -1,0 +1,150 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+include('db.php');
+$isLogged = isset($_GET['success']) && $_GET['success'] == '1';
+
+$paises = [];
+if ($isLogged) {
+    $result = mysqli_query($conexion, "SELECT id, nombre FROM paises ORDER BY nombre");
+    while ($row = mysqli_fetch_assoc($result)) {
+        $paises[] = $row;
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Log</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<?php if (!$isLogged): ?>
+
+    <div class="container" id="login-container">
+        <div class="card">
+            <h2>Bienvenido de vuelta</h2>
+            <p>Ingresa tus credenciales para continuar.</p>
+
+            <form action="login.php" method="POST">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" placeholder="Tu usuario" required autocomplete="username">
+
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+
+                <button type="submit">Iniciar sesión</button>
+            </form>
+
+            <?php if (isset($_GET['error'])): ?>
+                <p class="login-error">Usuario o contraseña incorrectos.</p>
+            <?php endif; ?>
+        </div>
+    </div>
+
+<?php else: ?>
+
+    <!-- Banner -->
+    <div class="banner">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&controls=0&mute=1&loop=1&playlist=dQw4w9WgXcQ"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="container" id="dashboard">
+        <div class="card">
+            <h1>Bienvenido 👋</h1>
+            <p>Sesión validada exitosamente. Explora las funciones.</p>
+
+            <!-- Acciones rápidas -->
+            <div class="section">
+                <span class="section-label">Acciones</span>
+                <button onclick="cambiarColor()">Cambiar Color</button>
+                <button onclick="mostrarAlerta()">Alerta JS</button>
+            </div>
+
+            <!-- Lista de tareas -->
+            <div class="section">
+                <span class="section-label">Lista de tareas</span>
+                <input type="text" id="taskInput" placeholder="Escribe una tarea nueva...">
+                <button onclick="addTask()">Agregar tarea</button>
+                <ul id="taskList"></ul>
+            </div>
+
+            <!-- Volumen -->
+            <div class="section">
+                <span class="section-label">Volumen</span>
+                <div class="range-row">
+                    <input type="range" min="0" max="100" value="100" oninput="updateValue(this.value)">
+                    <span id="value">100</span>
+                </div>
+            </div>
+
+            <!-- Modo oscuro -->
+            <div class="section">
+                <span class="section-label">Apariencia</span>
+                <div class="switch-row">
+                    <label class="switch">
+                        <input type="checkbox" onchange="toggleModo(this)">
+                        <span class="slider"></span>
+                    </label>
+                    <p>Modo ultra oscuro</p>
+                </div>
+            </div>
+
+            <a href="index.php" class="logout-link">Cerrar sesión</a>
+        </div>
+    </div>
+
+    <!-- Registro de ubicación -->
+    <div class="container" id="registro-ubicacion">
+        <div class="card">
+            <h2>Registro de Ubicación ✈️</h2>
+            <p>Guarda tu destino de viaje actual.</p>
+
+            <form id="formUbicacion" onsubmit="guardarDestino(event)">
+                <label for="nombre_usuario">Tu nombre</label>
+                <input type="text" id="nombre_usuario" name="nombre_usuario" placeholder="¿Cómo te llamas?" required>
+
+                <label for="pais">País</label>
+                <select name="id_pais" id="pais" required onchange="cargarCiudades(this.value)">
+                    <option value="">Selecciona un país</option>
+                    <?php foreach ($paises as $pais): ?>
+                        <option value="<?= $pais['id'] ?>"><?= htmlspecialchars($pais['nombre']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+
+                <label for="ciudad">Ciudad</label>
+                <select name="id_ciudad" id="ciudad" required disabled>
+                    <option value="">Primero selecciona un país</option>
+                </select>
+
+                <button type="submit">Guardar destino</button>
+            </form>
+
+            <div id="mensajeRegistro"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2026 · Travel Log · <a href="mailto:contacto@ejemplo.com">Contacto</a></p>
+        </div>
+    </footer>
+
+<?php endif; ?>
+
+<script src="script.js"></script>
+</body>
+</html>
