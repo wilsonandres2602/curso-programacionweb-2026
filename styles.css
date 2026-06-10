@@ -1,0 +1,234 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    text-align: center;
+    margin: 0;
+    transition: background 0.5s;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Banner */
+.banner {
+    width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.banner iframe,
+.banner img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border: none;
+    display: block;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 20px 0;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 400px; /* un poco más ancha para acomodar selects */
+    max-width: 90%;
+    transition: background-color 0.2s, backdrop-filter 0.2s;
+    margin: 0 auto;
+}
+
+/* Ajuste para que varias cards no queden pegadas */
+#dashboard {
+    margin-bottom: 20px;
+}
+
+#registro-ubicacion {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+input:not([type="range"]), select {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+/* Botones mejorados */
+button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px 20px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-weight: bold;
+    background: linear-gradient(145deg, #00c9ff, #0099cc);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(145deg, #0099cc, #007799);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.25);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.section {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+    background: transparent;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: white;
+    margin-top: -7px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/* Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+/* Footer */
+.footer {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: auto;
+    width: 100%;
+    transition: background-color 0.5s;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer a {
+    color: #00c9ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Ajustes responsive */
+@media (max-width: 600px) {
+    .card {
+        padding: 25px;
+        width: 90%;
+    }
+    .banner {
+        max-height: 150px;
+    }
+    .banner iframe,
+    .banner img {
+        height: 150px;
+    }
+}
